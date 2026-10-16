@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0C3B2E">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="description" content="Айан — сервис бронирования междугородних поездок по Якутии.">
+  <title>Айан — поездки по Якутии</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/ayan-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="announcement"><span class="ornament">✳</span> Айан · Дорога начинается здесь <span class="announcement-right">Саха сирэ · Якутия</span></div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Айан — на главную">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 3 29 13 40 8 35 19 45 24 35 29 40 40 29 35 24 45 19 35 8 40 13 29 3 24 13 19 8 8 19 13Z"/><circle cx="24" cy="24" r="6"/></svg></span>
+      <span><strong>айан</strong><small>ПО ДОРОГАМ ЯКУТИИ</small></span>
+    </a>
+    <nav class="desktop-nav" aria-label="Главная навигация">
+      <a href="#search">Найти поездку</a><a href="#how">Как это работает</a><a href="#routes">Направления</a>
+    </nav>
+    <div class="header-actions"><button class="btn btn-outline profile-top-btn" id="loginBtn"><span aria-hidden="true">♙</span><span id="loginBtnLabel">Профиль</span></button><button class="btn btn-primary" id="publishBtn">＋ Создать</button></div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> СВОИ ДОРОГИ. СВОИ ЛЮДИ.</div>
+        <h1>Твоя Якутия.<br><em>Твой путь.</em></h1>
+        <p class="hero-lead">Укажи адрес подачи, найди водителя или собери попутчиков по пути. А ещё отправляй небольшие посылки.</p>
+        <div class="hero-buttons"><a class="btn btn-sun" href="#search">Найти поездку <span>↗</span></a><button class="btn btn-glass" id="heroPublish">Я водитель <span>→</span></button></div>
+        <div class="hero-trust"><div class="avatar-stack"><span>А</span><span>М</span><span>Ы</span><span>+</span></div><div><strong>Местные знают дорогу</strong><small>Удобный поиск междугородних поездок</small></div></div>
+        <div class="hero-ornament" aria-hidden="true">ᛟ ᚷ ᛟ ᚷ ᛟ</div>
+      </div>
+      <div class="hero-art" role="img" aria-label="Иллюстрация северной природы, гор и дороги">
+        <div class="sun-disc"></div><div class="mountain mountain-back"></div><div class="mountain mountain-front"></div>
+        <div class="pine pine-one">♠</div><div class="pine pine-two">♠</div><div class="pine pine-three">♠</div>
+        <svg class="road" viewBox="0 0 650 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><path d="M255 520 C270 430 355 365 338 300 C320 225 440 170 650 135 L650 520Z" fill="#F3E5C7"/><path d="M302 520 C313 430 390 360 372 300 C354 235 466 190 650 160" fill="none" stroke="#C4A276" stroke-width="3" stroke-dasharray="16 17"/></svg>
+        <div class="art-stamp"><span>ᛟ</span><small>SAKHA<br>REPUBLIC</small></div>
+        <div class="art-caption"><span class="caption-line"></span><span>Север зовёт</span><small>62° 01′ N · 129° 44′ E</small></div>
+      </div>
+      <div class="hero-bottom-pattern" aria-hidden="true"></div>
+    </section>
+
+    <section class="search-wrap" id="search">
+      <div class="search-heading"><div><span class="section-kicker">ПОЕЗДКА ОТ ДВЕРИ ДО ДВЕРИ</span><h2>Куда держим путь?</h2></div><span class="search-note">⌁ Межгород по Якутии</span></div>
+      <div class="service-switch" role="tablist"><button type="button" class="service-tab active" data-service="rides">🚕 Такси</button><button type="button" class="service-tab" data-service="parcels">📦 Посылки</button></div>
+      <form class="search-card" id="searchForm">
+        <label class="field"><span>Откуда</span><div class="field-input"><span class="field-icon">⌖</span><select id="fromCity" required><option value="Якутск">Якутск</option><option value="Мирный">Мирный</option><option value="Нерюнгри">Нерюнгри</option><option value="Покровск">Покровск</option><option value="Намцы">Намцы</option><option value="Вилюйск">Вилюйск</option><option value="Алдан">Алдан</option></select></div></label>
+        <button class="swap-btn" type="button" id="swapCities" aria-label="Поменять города местами">⇄</button>
+        <label class="field"><span>Куда</span><div class="field-input"><span class="field-icon destination">⌖</span><select id="toCity" required><option value="Мирный">Мирный</option><option value="Якутск">Якутск</option><option value="Нерюнгри">Нерюнгри</option><option value="Покровск">Покровск</option><option value="Намцы">Намцы</option><option value="Вилюйск">Вилюйск</option><option value="Алдан">Алдан</option></select></div></label>
+        <label class="field address-field"><span>Адрес подачи в городе</span><div class="field-input"><span class="field-icon">⌖</span><input id="pickupAddress" placeholder="Например, ул. Ленина, 12" /></div></label>
+        <label class="field"><span>Дата поездки</span><div class="field-input"><span class="field-icon">▦</span><input type="date" id="tripDate" required></div></label>
+        <label class="field seats-field"><span>Пассажиры</span><div class="field-input"><span class="field-icon">♙</span><select id="seatCount"><option value="1">1 пассажир</option><option value="2">2 пассажира</option><option value="3">3 пассажира</option><option value="4">4 пассажира</option></select></div></label>
+        <button class="btn btn-primary search-submit" type="submit">Найти рейс <span>→</span></button>
+      </form>
+      <div class="search-feedback" id="searchFeedback" aria-live="polite"></div><div class="request-ride-cta"><span>Не нашли подходящий рейс?</span><button class="btn btn-outline" id="requestRideBtn" type="button">Оставить заявку на поездку ＋</button></div>
+      <form id="parcelSearchForm" class="parcel-search-card" hidden><label class="form-label">Откуда<select id="parcelFrom"><option>Якутск</option><option>Мирный</option><option>Нерюнгри</option><option>Покровск</option><option>Намцы</option><option>Алдан</option></select></label><label class="form-label">Куда<select id="parcelTo"><option>Мирный</option><option>Якутск</option><option>Нерюнгри</option><option>Покровск</option><option>Намцы</option><option>Алдан</option></select></label><label class="form-label">Вес, кг<input type="number" id="parcelWeight" min="0.1" max="20" step="0.1" value="1" required></label><label class="form-label">Адрес получателя<input id="parcelAddress" placeholder="Населённый пункт, улица" required></label><div class="parcel-price" id="parcelPrice">Ориентировочно: 250 ₽ за 1 кг</div><button type="submit" class="btn btn-primary">Найти перевозчика →</button></form>
+    </section>
+
+    <section class="app-section live-rides-section" id="liveRides"><div class="section-top"><div><span class="section-kicker">СЕГОДНЯ И БЛИЖАЙШИЕ ДНИ</span><h2>Актуальные рейсы</h2></div><span class="search-note">Рейтинг и свободные места</span></div><div id="liveRideFeed" class="live-ride-feed"></div></section>
+
+    <section class="routes-section" id="routes">
+      <div class="section-top"><div><span class="section-kicker">ПОПУЛЯРНЫЕ МАРШРУТЫ</span><h2>Дороги, которые нас объединяют</h2></div><button class="text-link" id="allRoutesBtn">Все направления <span>↗</span></button></div>
+      <div class="route-grid" id="routeGrid">
+        <button class="route-card" data-from="Якутск" data-to="Мирный"><span class="route-scenery scenery-1"><span class="route-sun"></span><span class="route-mountain"></span></span><span class="route-info"><span class="route-cities">Якутск <b>→</b> Мирный</span><span class="route-meta">≈ 12–14 ч <b>от 5 500 ₽</b></span></span></button>
+        <button class="route-card" data-from="Якутск" data-to="Нерюнгри"><span class="route-scenery scenery-2"><span class="route-sun"></span><span class="route-mountain"></span></span><span class="route-info"><span class="route-cities">Якутск <b>→</b> Нерюнгри</span><span class="route-meta">≈ 10–12 ч <b>от 4 800 ₽</b></span></span></button>
+        <button class="route-card" data-from="Якутск" data-to="Покровск"><span class="route-scenery scenery-3"><span class="route-sun"></span><span class="route-mountain"></span></span><span class="route-info"><span class="route-cities">Якутск <b>→</b> Покровск</span><span class="route-meta">≈ 2 ч <b>от 900 ₽</b></span></span></button>
+        <button class="route-card" data-from="Якутск" data-to="Намцы"><span class="route-scenery scenery-4"><span class="route-sun"></span><span class="route-mountain"></span></span><span class="route-info"><span class="route-cities">Якутск <b>→</b> Намцы</span><span class="route-meta">≈ 2 ч <b>от 800 ₽</b></span></span></button>
+      </div>
+    </section>
+
+    <section class="app-section ride-request-feed-section" id="rideRequestFeed"></section>
+
+    <section class="app-section" id="profileSection"><div class="section-top"><div><span class="section-kicker">ЛИЧНЫЙ КАБИНЕТ</span><h2>Мой профиль</h2></div><button class="text-link" id="editProfileBtn">Настройки ↗</button></div><div id="profileCard" class="profile-card"><div class="profile-avatar">А</div><div><h3>Вы ещё не вошли</h3><p>Войдите, чтобы видеть поездки, заявки и сообщения.</p><button class="btn btn-primary" id="profileLoginBtn">Войти / зарегистрироваться</button></div></div><div id="roleDashboard" class="role-dashboard"></div></section>
+
+    <section class="app-section" id="parcelSection"><div class="section-top"><div><span class="section-kicker">НЕ ТОЛЬКО ПАССАЖИРЫ</span><h2>Малогабаритные посылки</h2></div><span class="search-note">Фиксированная цена за кг</span></div><div class="parcel-info-grid"><article><span>📦</span><h3>До 20 кг</h3><p>Документы, одежда, небольшие покупки и личные вещи.</p></article><article><span>⚖️</span><h3>Прозрачный тариф</h3><p>Демо-тариф: 250 ₽/кг по ближним направлениям, 400 ₽/кг по дальним.</p></article><article><span>🤝</span><h3>Передача по адресу</h3><p>Укажите адрес отправителя и получателя, затем согласуйте передачу с водителем.</p></article></div></section>
+
+    <section class="app-section" id="adminSection" hidden><div class="section-top"><div><span class="section-kicker">УПРАВЛЕНИЕ СЕРВИСОМ</span><h2>Панель администратора</h2></div><span class="admin-badge">ADMIN</span></div><div id="adminStats" class="admin-stats"></div><div class="admin-actions"><button class="btn btn-outline" id="adminVerifyBtn">Проверить водителей</button><button class="btn btn-outline" id="adminExportBtn">Экспорт данных JSON</button><button class="btn btn-outline" id="adminResetBtn">Сбросить демо-данные</button></div><div class="admin-subheading">Публикации и заявки</div><div id="adminTripList" class="admin-trip-list"></div><div class="admin-subheading">Пользователи</div><div id="adminUserList" class="admin-trip-list"></div></section>
+
+    <section class="trust-section" id="how">
+      <div class="trust-intro"><span class="section-kicker">ПРОСТО И ПОНЯТНО</span><h2>Путь становится<br><em>ближе с Айан</em></h2><p>Собрали всё нужное для поездки в одном месте. Без бесконечных поисков по чатам.</p><a class="text-link" href="#search">Начать поиск <span>→</span></a></div>
+      <div class="benefits">
+        <article class="benefit"><span class="benefit-icon">⌕</span><div><h3>Удобный поиск</h3><p>Маршрут, дата и свободные места — всё видно сразу.</p></div><span class="benefit-number">01</span></article>
+        <article class="benefit"><span class="benefit-icon">✳</span><div><h3>Профили водителей</h3><p>Информация об автомобиле, рейтинг и отзывы пассажиров.</p></div><span class="benefit-number">02</span></article>
+        <article class="benefit"><span class="benefit-icon">⌁</span><div><h3>Бронь без путаницы</h3><p>Заявки и статус бронирования хранятся в личном кабинете.</p></div><span class="benefit-number">03</span></article>
+      </div>
+    </section>
+
+    <section class="driver-banner"><div class="banner-pattern" aria-hidden="true">ᛟ ᚷ ᛟ ᚷ ᛟ ᚷ ᛟ</div><div><span class="section-kicker">ДЛЯ ВОДИТЕЛЕЙ</span><h2>Твой маршрут —<br>чья-то дорога домой.</h2><p>Публикуй рейсы, управляй заявками и находи пассажиров в одном месте.</p></div><button class="btn btn-sun" id="bannerPublish">Опубликовать рейс <span>↗</span></button></section>
+
+    <footer class="site-footer"><a class="brand footer-brand" href="#home"><span class="brand-mark"><svg viewBox="0 0 48 48"><path d="M24 3 29 13 40 8 35 19 45 24 35 29 40 40 29 35 24 45 19 35 8 40 13 29 3 24 13 19 8 8 19 13Z"/><circle cx="24" cy="24" r="6"/></svg></span><span><strong>айан</strong><small>ПО ДОРОГАМ ЯКУТИИ</small></span></a><p>Создано с уважением к северным дорогам и людям.</p><div class="footer-links"><button id="supportFooter">Поддержка</button><a href="#how">О сервисе</a><span>© Айан, 2026</span></div></footer>
+  </main>
+
+  <button class="support-fab" id="supportFab" aria-label="Открыть чат поддержки"><span>✳</span><i></i></button>
+  <section class="chat-panel" id="chatPanel" aria-label="Чат поддержки" hidden>
+    <div class="chat-head"><div class="support-avatar">✳</div><div><strong>Поддержка Айан</strong><small><span class="online-dot"></span> Обычно отвечаем быстро</small></div><button id="closeChat" aria-label="Закрыть чат">×</button></div>
+    <div class="chat-messages" id="chatMessages"><div class="chat-date">Сегодня</div><div class="message support-message"><span>Саха дойдуга! 👋<br>Здравствуйте! Я помощник Айан. Чем могу помочь с поездкой?</span><small>Айан · помощник</small></div></div>
+    <div class="quick-replies" id="quickReplies"><button data-message="Как забронировать место?">Как забронировать?</button><button data-message="Как опубликовать рейс?">Я водитель</button></div>
+    <form class="chat-compose" id="chatForm"><input id="chatInput" autocomplete="off" placeholder="Напишите сообщение…" aria-label="Сообщение в поддержку" required><button type="submit" aria-label="Отправить сообщение">↑</button></form>
+    <div class="chat-disclaimer">Демо-чат · ответы формируются автоматически</div>
+  </section>
+
+  <dialog class="modal auth-modal" id="authModal"><form method="dialog" class="modal-close-form"><button class="modal-close" aria-label="Закрыть">×</button></form><div class="modal-emblem">ᛟ</div><span class="section-kicker">ВАШ ПУТЬ НАЧИНАЕТСЯ ЗДЕСЬ</span><h2 id="authTitle">Войти в Айан</h2><p class="modal-description" id="authDescription">Войдите в аккаунт или создайте новый.</p><div class="auth-tabs" role="tablist" aria-label="Авторизация"><button type="button" class="auth-tab active" id="showLoginTab">Вход</button><button type="button" class="auth-tab" id="showRegisterTab">Регистрация</button></div><form id="authForm"><label class="form-label" id="authNameWrap" hidden>Имя<input id="authName" autocomplete="given-name" placeholder="Ваше имя"></label><label class="form-label" id="authSurnameWrap" hidden>Фамилия<input id="authSurname" autocomplete="family-name" placeholder="Ваша фамилия"></label><label class="form-label">Номер телефона<input id="authPhone" type="tel" autocomplete="tel" placeholder="+7 999 123-45-67" required></label><label class="form-label" id="authRoleWrap">Кто вы?<select id="authRole"><option value="passenger">Пассажир</option><option value="driver">Водитель</option></select></label><label class="form-label" id="authCarWrap" hidden>Машина<input id="authCar" placeholder="Например, Toyota Noah"></label><label class="form-label" id="authPlateWrap" hidden>Номер автомобиля<input id="authPlate" placeholder="А123АА 14"></label><label class="form-label">Пароль<input id="authPassword" type="password" autocomplete="new-password" minlength="6" placeholder="Не менее 6 символов" required></label><button class="btn btn-primary modal-submit" id="authSubmitBtn" type="submit">Войти <span>→</span></button></form><p class="modal-footnote">Демо-версия: аккаунты хранятся только на этом устройстве. Для настоящей авторизации потребуется защищённый сервер.</p></dialog>
+
+  <dialog class="modal publish-modal" id="publishModal"><form method="dialog" class="modal-close-form"><button class="modal-close" aria-label="Закрыть">×</button></form><div class="modal-emblem">ᛟ</div><span class="section-kicker">ДЛЯ ТЕХ, КТО ЗА РУЛЁМ</span><h2>Опубликовать рейс</h2><p class="modal-description">Заполните детали поездки, чтобы пассажиры могли отправить заявку.</p><form id="publishForm" class="publish-form">
+    <div class="form-two"><label class="form-label">Откуда<select id="pubFrom"><option>Якутск</option><option>Мирный</option><option>Нерюнгри</option><option>Покровск</option><option>Намцы</option><option>Вилюйск</option><option>Алдан</option></select></label><label class="form-label">Куда<select id="pubTo"><option>Мирный</option><option>Якутск</option><option>Нерюнгри</option><option>Покровск</option><option>Намцы</option><option>Вилюйск</option><option>Алдан</option></select></label></div>
+    <div class="form-two"><label class="form-label">Дата<input type="date" id="pubDate" required></label><label class="form-label">Время<input type="time" id="pubTime" value="09:00" required></label></div>
+    <div class="form-two"><label class="form-label">Цена за место, ₽<input type="number" id="pubPrice" min="100" step="100" placeholder="2500" required></label><label class="form-label">Свободных мест<select id="pubSeats"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></label></div>
+    <label class="form-label">Адрес подачи / место сбора<input id="pubPickup" placeholder="Например, ТЦ, адрес или район" required></label><label class="form-label">Автомобиль<input id="pubCar" placeholder="Toyota Noah, белый" required></label><label class="form-label">Комментарий (необязательно)<textarea id="pubComment" rows="2" placeholder="Место встречи, багаж…"></textarea></label>
+    <button class="btn btn-primary modal-submit" type="submit">Опубликовать рейс <span>↗</span></button></form><p class="modal-footnote">Рейс сохранится в этой демо-версии на вашем устройстве.</p></dialog>
+
+  <dialog class="modal publish-modal" id="rideRequestModal"><form method="dialog" class="modal-close-form"><button class="modal-close" aria-label="Закрыть">×</button></form><div class="modal-emblem">⌁</div><span class="section-kicker">ЗАПРОС ПАССАЖИРАМ</span><h2>Заявка на поездку</h2><p class="modal-description">Опишите, куда и когда нужно поехать. Водители увидят заявку и смогут откликнуться.</p><form id="rideRequestForm" class="publish-form"><div class="form-two"><label class="form-label">Откуда<select id="reqFrom"><option>Якутск</option><option>Мирный</option><option>Нерюнгри</option><option>Покровск</option><option>Намцы</option><option>Вилюйск</option><option>Алдан</option></select></label><label class="form-label">Куда<select id="reqTo"><option>Мирный</option><option>Якутск</option><option>Нерюнгри</option><option>Покровск</option><option>Намцы</option><option>Вилюйск</option><option>Алдан</option></select></label></div><div class="form-two"><label class="form-label">Дата<input id="reqDate" type="date" required></label><label class="form-label">Пассажиров<select id="reqSeats"><option>1</option><option>2</option><option>3</option><option>4</option></select></label></div><label class="form-label">Адрес подачи<input id="reqPickup" placeholder="Улица, дом или ориентир" required></label><label class="form-label">Цена за место, ₽ (необязательно)<input id="reqBudget" type="number" min="0" step="100" placeholder="Например, 2500"></label><label class="form-label">Комментарий<textarea id="reqComment" rows="2" placeholder="Багаж, удобное время, пожелания"></textarea></label><button class="btn btn-primary modal-submit" type="submit">Опубликовать заявку →</button></form></dialog>
+  <dialog class="modal results-modal" id="resultsModal"><form method="dialog" class="modal-close-form"><button class="modal-close" aria-label="Закрыть">×</button></form><span class="section-kicker">ВАШ МАРШРУТ</span><h2 id="resultsTitle">Доступные рейсы</h2><p class="modal-description" id="resultsSubtitle"></p><div id="resultsList" class="results-list"></div><button class="btn btn-outline modal-submit" id="closeResults">Закрыть</button></dialog>
+
+  <dialog class="modal" id="profileModal"><form method="dialog" class="modal-close-form"><button class="modal-close" aria-label="Закрыть">×</button></form><span class="section-kicker">МОИ ДАННЫЕ</span><h2>Профиль</h2><div id="profileModalContent"></div><button class="btn btn-outline modal-submit" id="logoutBtn">Выйти из профиля</button></dialog>
+  <dialog class="modal results-modal" id="parcelResultsModal"><form method="dialog" class="modal-close-form"><button class="modal-close" aria-label="Закрыть">×</button></form><span class="section-kicker">ДОСТАВКА ПО ЯКУТИИ</span><h2>Передать посылку</h2><p id="parcelResultText" class="modal-description"></p><div id="parcelDriverResults" class="results-list"></div><button class="btn btn-outline modal-submit" id="closeParcelResults">Закрыть</button></dialog>
+  <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Основная навигация"><button data-target="liveRides" data-tab="rides"><span>⌁</span>Рейсы</button><button data-target="rideRequestFeed" data-tab="requests"><span>＋</span><b id="requestsTabLabel">Заявки</b></button><button data-target="profileSection" data-tab="profile"><span>♙</span>Профиль</button></nav>
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

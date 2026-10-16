@@ -1,0 +1,15 @@
+{
+  "name": "Айан — межгород по Якутии",
+  "short_name": "Айан",
+  "description": "Мобильный сервис междугороднего такси и малогабаритных посылок в Якутии",
+  "lang": "ru-RU",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F5F7F0",
+  "theme_color": "#0C3B2E",
+  "icons": [
+    { "src": "./icons/ayan-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
